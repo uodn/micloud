@@ -4,24 +4,20 @@
   <title>Upload your files</title>
 </head>
 <body>
-  <form enctype="multipart/form-data" action="upload.php" method="POST">
-    <p>Upload your file</p>
-    <input type="file" name="uploaded_file"></input><br />
-    <input type="submit" value="Upload"></input>
-  </form>
+  <div id="file-upload">
+   <form class="b-upload" action="http://rubaxa.org/FileAPI/server/ctrl.php" method="POST" enctype="multipart/form-data">
+      <div class="btn btn-success btn-small js-fileapi-wrapper">
+         <span>Browse</span>
+         <input type="file" name="filedata">
+      </div>
+      <span class="js-info">
+         <span class="js-name b-upload__name"></span>
+         <span class="b-upload__size">(<span class="js-size"></span>)</span>
+      </span>
+      <hr>
+      <button class="js-send btn-small btn btn-primary" type="submit">Send</button>
+      <button class="js-reset btn-small btn btn-warning" type="reset">reset</button>
+   </form>
+</div>
 </body>
 </html>
-<?PHP
-  if(!empty($_FILES['uploaded_file']))
-  {
-    $path = "micloud/2b85efc5524dd55dffc5e86081a1b664fa788c24/uploads/";
-    $path = $path . basename( $_FILES['uploaded_file']['name']);
-
-    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
-      echo "The file ".  basename( $_FILES['uploaded_file']['name']). 
-      " has been uploaded";
-    } else{
-        echo "There was an error uploading the file, please try again!";
-    }
-  }
-?>
